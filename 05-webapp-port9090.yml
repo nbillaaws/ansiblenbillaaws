@@ -1,0 +1,22 @@
+---
+- name: update web servers
+  hosts: web
+  become: yes
+  
+  tasks:
+  - name: ensure port 9090 is updated
+    copy:
+      src: httpd.conf
+      dest: /etc/httpd/conf/httpd.conf
+
+  - name: ensure SELinux is permissive
+    selinux:
+      policy: targeted
+      state: permissive
+  
+  - name: ensure apache is restarted
+    service:
+      name: httpd
+      state: restarted
+
+... 
