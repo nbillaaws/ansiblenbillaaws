@@ -1,0 +1,29 @@
+---
+- name: update web servers
+  hosts: web
+ 
+  tasks:
+  - name: ensure directory is created
+    file:
+      path: /home/centos/web
+      state: directory
+
+  - name: ensure web file is updated
+    copy:
+      dest: /home/centos/web/web.conf
+      content: my web app configuration
+
+- name: update app servers
+  hosts: app
+
+  tasks:
+  - name: ensure directory is created
+    file:
+      path: /home/centos/app
+      state: directory
+ 
+  - name: ensure app file is updated
+    copy:
+      dest: /home/centos/app/app.conf
+      content: my app configuration
+...
